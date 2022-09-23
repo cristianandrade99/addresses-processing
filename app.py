@@ -8,6 +8,15 @@ CATEGORIES_PATH = os.path.join(PROJECT_FOLDER, 'data', 'categories')
 NOT_PROCESSED_PATH = os.path.join(CATEGORIES_PATH, 'not_processed.json')
 
 
+def get_calle_format(data, calle_keys):
+    formated = data
+    for key_word in calle_keys:
+        formated = formated.replace(key_word, 'Calle')
+    # ADD MORE LOGIC
+    # ...
+    return formated
+
+
 def main():
     # Save only addresses into json
     # df = pd.read_excel('./Data-Companies.xlsx')
@@ -47,8 +56,7 @@ def main():
         address_modified = address_formated
         if is_calle and not is_carrera:
             key = 'calle'
-            for key_word in calle_keys:
-                address_modified = address_modified.replace(key_word, 'Calle')
+            address_modified = get_calle_format(address_modified, calle_keys)
 
         elif is_carrera and not is_calle:
             key = 'carrera'
